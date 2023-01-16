@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp/interface/home.dart';
+import 'package:whatsapp/interface/register.dart';
+
+import '../model/user_model.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -8,10 +13,80 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+  String _msgError = "";
+
+  _limparCamapos() {
+    _emailController.text = "";
+    _passController.text = "";
+  }
+
+  validate() {
+    String email = _emailController.text;
+    String password = _passController.text;
+    print("$email, $password");
+    if (email.isNotEmpty && email.contains("@")) {
+      if (password.isNotEmpty) {
+        UserModel userModel = UserModel("", email, password);
+        login(userModel);
+      } else {
+        setState(() {
+          _msgError = "Preencha o campo email ou coloque u e-mail válido.";
+        });
+      }
+    } else {
+      setState(() {
+        _msgError = "Preencha o campo senha";
+      });
+    }
+  }
+
+  login(UserModel userModel) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    auth
+        .signInWithEmailAndPassword(
+            email: userModel.email!, password: userModel.password!)
+        .then(
+      (log) {
+        print("Login sucess!");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+        );
+      },
+    ).catchError(
+      (onError) {
+        setState(() {
+          _msgError = onError;
+        });
+      },
+    );
+  }
+
+  // Future _verificarUsuarioLogado() async {
+  //   User? user = FirebaseAuth.instance.currentUser;
+
+  //   if (user != null) {
+  //     Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => const Principal(),
+  //         ));
+  //   }
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: const Color(0XFF075E54),
       body: Center(
         child: Container(
           padding: const EdgeInsets.only(
@@ -31,7 +106,7 @@ class _LoginState extends State<Login> {
                     bottom: 32,
                   ),
                   child: Image.asset(
-                    "images/logo.png",
+                    "assets/images/logo.png",
                     width: 200,
                     height: 150,
                   ),
@@ -39,6 +114,7 @@ class _LoginState extends State<Login> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: TextField(
+                    controller: _emailController,
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(
@@ -58,6 +134,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 TextField(
+                  controller: _passController,
                   keyboardType: TextInputType.text,
                   style: const TextStyle(
                     fontSize: 20,
@@ -72,6 +149,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(32),
                     ),
                   ),
+                  obscureText: true,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -79,7 +157,7 @@ class _LoginState extends State<Login> {
                     bottom: 10,
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: validate,
                     autofocus: true,
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
@@ -99,7 +177,14 @@ class _LoginState extends State<Login> {
                 ),
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Register(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Não tem conta? Cadastre-se!",
                       style: TextStyle(
@@ -107,6 +192,13 @@ class _LoginState extends State<Login> {
                         fontSize: 16,
                       ),
                     ),
+                  ),
+                ),
+                Text(
+                  _msgError,
+                  style: const TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
                   ),
                 ),
               ],

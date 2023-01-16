@@ -1,23 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsapp/core/cores.dart';
-import 'firebase_options.dart';
+import 'package:whatsapp/interface/login.dart';
 
-import 'home.dart';
+import 'package:whatsapp/interface/register.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: "MyApp",
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   runApp(
-    MaterialApp(
+    const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: TemaApp.themaApp,
-      home: const Login(),
+      home: Login(),
     ),
   );
 }

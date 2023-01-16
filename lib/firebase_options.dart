@@ -44,40 +44,42 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCGLlImr5I6i1JNBMwSKNjcqXaYpOrEClY',
-    appId: '1:659447962891:web:b10c5149338b0c64a6560e',
-    messagingSenderId: '659447962891',
-    projectId: 'mywhatsapp-1115f',
-    authDomain: 'mywhatsapp-1115f.firebaseapp.com',
-    storageBucket: 'mywhatsapp-1115f.appspot.com',
-    measurementId: 'G-ZT7BTK5TX7',
+    apiKey: "AIzaSyAeyb7Q-tXi1L8RJeK4nW5GIzT7TEFI05U",
+    authDomain: "myapp-289e9.firebaseapp.com",
+    projectId: "myapp-289e9",
+    storageBucket: "myapp-289e9.appspot.com",
+    messagingSenderId: "1051779842971",
+    appId: "1:1051779842971:web:7c0ff5e1be642ea278173e",
+    measurementId: "G-DLBZP5YM98",
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAgb_-XmInBCL0nNpLkwjyyKAXZVeQ8uLs',
-    appId: '1:659447962891:android:36cf9e636845471fa6560e',
-    messagingSenderId: '659447962891',
-    projectId: 'mywhatsapp-1115f',
-    storageBucket: 'mywhatsapp-1115f.appspot.com',
+    apiKey: 'AIzaSyCB0A9ZABGP9VOZ-OcNreIjF31BtpBeWyY',
+    appId: '1:1051779842971:android:95953266a541c41478173e',
+    messagingSenderId: '1051779842971',
+    projectId: 'myapp-289e9',
+    storageBucket: 'myapp-289e9.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA1GzKB7rfVWe5AeJWaUvFY1i5quG0nYe0',
-    appId: '1:659447962891:ios:b3ca173381550ca0a6560e',
-    messagingSenderId: '659447962891',
-    projectId: 'mywhatsapp-1115f',
-    storageBucket: 'mywhatsapp-1115f.appspot.com',
-    iosClientId: '659447962891-427n3b02hajumf1d6qki0fk8qq6h1k0u.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCwUfOvjD2WsvUIAiA8MfCrsRx7OSZkqZQ',
+    appId: '1:1051779842971:ios:940638b2b51f3db678173e',
+    messagingSenderId: '1051779842971',
+    projectId: 'myapp-289e9',
+    storageBucket: 'myapp-289e9.appspot.com',
+    iosClientId:
+        '1051779842971-a7udpqj0jo1jbpolmlv6ilff9ah5594t.apps.googleusercontent.com',
     iosBundleId: 'com.example.whatsapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA1GzKB7rfVWe5AeJWaUvFY1i5quG0nYe0',
-    appId: '1:659447962891:ios:b3ca173381550ca0a6560e',
-    messagingSenderId: '659447962891',
-    projectId: 'mywhatsapp-1115f',
-    storageBucket: 'mywhatsapp-1115f.appspot.com',
-    iosClientId: '659447962891-427n3b02hajumf1d6qki0fk8qq6h1k0u.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCwUfOvjD2WsvUIAiA8MfCrsRx7OSZkqZQ',
+    appId: '1:1051779842971:ios:940638b2b51f3db678173e',
+    messagingSenderId: '1051779842971',
+    projectId: 'myapp-289e9',
+    storageBucket: 'myapp-289e9.appspot.com',
+    iosClientId:
+        '1051779842971-a7udpqj0jo1jbpolmlv6ilff9ah5594t.apps.googleusercontent.com',
     iosBundleId: 'com.example.whatsapp',
   );
 }
