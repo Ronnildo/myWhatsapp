@@ -25,19 +25,19 @@ class _LoginState extends State<Login> {
   validate() {
     String email = _emailController.text;
     String password = _passController.text;
-    print("$email, $password");
+
     if (email.isNotEmpty && email.contains("@")) {
       if (password.isNotEmpty) {
         UserModel userModel = UserModel("", email, password);
         login(userModel);
       } else {
         setState(() {
-          _msgError = "Preencha o campo email ou coloque u e-mail válido.";
+          _msgError = "Preencha o campo senha.";
         });
       }
     } else {
       setState(() {
-        _msgError = "Preencha o campo senha";
+        _msgError = "Preencha o campo email ou coloque um e-mail válido.";
       });
     }
   }
@@ -49,13 +49,8 @@ class _LoginState extends State<Login> {
             email: userModel.email!, password: userModel.password!)
         .then(
       (log) {
-        print("Login sucess!");
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
-        );
+        _limparCamapos();
+        Navigator.pushReplacementNamed(context, "/home");
       },
     ).catchError(
       (onError) {
@@ -66,21 +61,19 @@ class _LoginState extends State<Login> {
     );
   }
 
-  // Future _verificarUsuarioLogado() async {
-  //   User? user = FirebaseAuth.instance.currentUser;
+  Future _verificarUsuarioLogado() async {
+    User? user = await FirebaseAuth.instance.currentUser;
 
-  //   if (user != null) {
-  //     Navigator.push(
-  //         context,
-  //         MaterialPageRoute(
-  //           builder: (context) => const Principal(),
-  //         ));
-  //   }
-  // }
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, "/home");
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _verificarUsuarioLogado();
+    _limparCamapos();
   }
 
   @override
@@ -119,13 +112,19 @@ class _LoginState extends State<Login> {
                     keyboardType: TextInputType.emailAddress,
                     style: const TextStyle(
                       fontSize: 20,
-                      color: Colors.red,
                     ),
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                       hintText: "E-mail",
                       hintStyle: TextStyle(color: Colors.grey.shade500),
                       filled: true,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: Colors.green,
+                          width: 2,
+                        ),
+                      ),
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32),
@@ -144,6 +143,13 @@ class _LoginState extends State<Login> {
                     hintText: "Senha",
                     hintStyle: TextStyle(color: Colors.grey.shade500),
                     filled: true,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32),
+                      borderSide: const BorderSide(
+                        color: Colors.green,
+                        width: 2,
+                      ),
+                    ),
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(32),

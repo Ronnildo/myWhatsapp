@@ -78,18 +78,13 @@ class _RegisterState extends State<Register> {
       ref.add(user.toJson()).then((cad) {
         print("Dados cadastrados!");
         limparCampos();
+        Navigator.pushReplacementNamed(context, "/home");
       }).catchError(
         (onError) {
           setState(() {
             _msgError = "Erro ao cadastrar usuário! Tente novamente.";
           });
         },
-      );
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Login(),
-        ),
       );
     }).catchError((onError) {
       List erro = onError.toString().split("]");
@@ -160,6 +155,13 @@ class _RegisterState extends State<Register> {
                       hintStyle: TextStyle(color: Colors.grey.shade500),
                       filled: true,
                       fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: Colors.green,
+                          width: 2,
+                        ),
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32),
                       ),
@@ -181,6 +183,13 @@ class _RegisterState extends State<Register> {
                       hintStyle: TextStyle(color: Colors.grey.shade500),
                       filled: true,
                       fillColor: Colors.white,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        borderSide: const BorderSide(
+                          color: Colors.green,
+                          width: 2,
+                        ),
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32),
                       ),
@@ -201,13 +210,20 @@ class _RegisterState extends State<Register> {
                     hintStyle: TextStyle(color: Colors.grey.shade500),
                     filled: true,
                     fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(32),
+                      borderSide: const BorderSide(
+                        color: Colors.green,
+                        width: 2,
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(32),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     top: 10,
                   ),
                   child: Text(_msgError),

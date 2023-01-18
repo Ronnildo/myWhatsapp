@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsapp/RouterGenerator.dart';
+import 'package:whatsapp/interface/home.dart';
 import 'package:whatsapp/interface/login.dart';
 
 import 'package:whatsapp/interface/register.dart';
@@ -15,7 +17,9 @@ void main() async {
   runApp(
     const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      initialRoute: "/login",
+      onGenerateRoute: RouterGererator.genareteRoute,
+      // home: Login(),
     ),
   );
 }
